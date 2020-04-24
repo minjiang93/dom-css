@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>每次点击后累加</title>
+	<style type="text/css" media="screen">
+		body {
+			margin: 0;
+			padding: 0;
+		}
+		input {
+			display: block;
+			cursor: pointer;
+			margin:10px auto;
+		}
+	</style>
+	<script type="text/javascript">
+		window.onload = function() {
+			var btn = document.getElementById("cal")
+			btn.onclick = function() {
+				var cal = parseInt(this.value)
+				alert(cal)
+				btn.value++
+			}
+		}
+	</script>
+</head>
+<body>
+	<input type="button" value = "0" id = "cal"/>
+</body>
+</html>

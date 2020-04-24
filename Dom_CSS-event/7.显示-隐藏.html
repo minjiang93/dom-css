@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title></title>
+	<style>
+		body,div,ul,li,h2 {
+			margin:0;
+			padding:0;
+		}
+		body {
+			font:12px/1.5 Tahoma;
+		}
+		ul {
+			list-style-type:none;
+		}
+		#outer {
+			width:200px;
+			border:1px solid #aaa;
+			margin:10px auto;
+		}
+		#outer h2 {
+			cursor:pointer;
+			color:#57646E;
+			font-size:14px;
+			font-weight:400;
+			border:1px solid;
+			height:30px;
+			line-height:30px;
+			padding-left:10px;
+			background:#ced3d7;
+			border-color:#fff #e9edf2;
+		}
+		#outer h2.open {
+			background-position:180px -12px;
+		}
+		#outer ul {
+			border-top:1px solid #DEE3E6;
+		}
+		#outer li {
+			height:25px;
+			line-height:25px;
+			vertical-align:top;
+		}
+		#outer a {
+			display:block;
+			color:#6b7980;
+			background:#e9edf2;
+			text-decoration:none;
+			padding:0 10px;
+		}
+		#outer a:hover {
+			background:#fff;
+			text-decoration:underline;
+		}
+	</style>
+	<script>
+		window.onload = function ()
+		{
+			var oH2 = document.getElementsByTagName("h2")[0];
+			var oUl = document.getElementsByTagName("ul")[0];
+			oH2.onclick = function ()
+			{
+				var style = oUl.style;
+				style.display = style.display == "none" ? "block" : "none";
+				oH2.className = style.display == "none" ? "open" : ""
+			}
+		}
+	</script>
+<body>
+	<div id="outer">
+	    <h2>播放列表</h2>
+	    <ul>
+	        <li><a href="javascript:;">遥远的她 - 张学友</a></li>
+	        <li><a href="javascript:;">离人 - 张学友</a></li>
+	        <li><a href="javascript:;">秋意浓 - 张学友</a></li>
+	        <li><a href="javascript:;">饿狼传说 - 张学友</a></li>
+	        <li><a href="javascript:;">情歌王 - 古巨基</a></li>
+	        <li><a href="javascript:;">小王日记 - 毛不易</a></li>
+	    </ul>
+	</div>
+</body>
+</html>

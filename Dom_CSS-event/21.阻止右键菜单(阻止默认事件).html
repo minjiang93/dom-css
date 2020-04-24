@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>阻止右键菜单（阻止默认事件）</title>
+	<style>
+		pre {
+			color:green;
+			padding:10px 15px;
+			background:#f0f0f0;
+			border:1px dotted #333;
+			font:12px/1.5 Courier New;
+		}
+		span {
+			color:#999;
+		}
+	</style>
+	<script type="text/javascript">
+		document.oncontextmenu = function ()
+		{
+			// 鼠标右键的默认事件被阻止了
+			// 和keycode 一起使用，用来防止页面内容被拷贝
+			return false
+		}
+	</script>
+</head>
+<body>
+<pre>
+&lt;script type="text/javascript"&gt;
+<span>//※oncontextmenu</span>
+document.oncontextmenu = function ()
+{
+	return false
+}
+&lt;/script&gt;
+</pre>
+</body>
+</html>

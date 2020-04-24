@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title></title>
+	<style type="text/css" media="screen">
+		pre{color:green;padding:10px 15px;background:#f0f0f0;border:1px dotted #333;font:12px/1.5 Courier New;}
+        span{color:#999;}
+	</style>
+	<script type="text/javascript">
+		window.onload = function() {
+			//给Array的原型添加求和方法
+			Array.prototype.sum = function ()
+			{
+				for (var sum = i = 0; i < this.length; i++)sum += parseInt(this[i]);
+				return sum
+			};
+			//给Array的原型添加求最大值方法
+			Array.prototype.maxima = function ()
+			{//Number.MIN_VALUE 无限接近0的正数
+				for (var i = 0, maxValue = Number.MIN_VALUE; i < this.length; i++)
+					// 当数组的值大于maxValue时，把maxValue换成当前值
+					parseInt(this[i]) > maxValue && (maxValue = this[i]);
+				return maxValue
+			};
+			//应用
+			var arr = [1,21,3,4,22,45,6,7,32];
+			alert(arr.join("+") + "=" + arr.sum()); //和：141
+			alert(arr.join("|") + "中, 最大的数是:" + arr.maxima()); //最大数：45
+		}
+	</script>
+</head>
+<body>
+<pre>
+&lt;script type="text/javascript"&gt;
+//求和
+Array.prototype.sum = function ()
+{
+	for (var sum = i = 0; i < this.length; i++)sum += parseInt(this[i]);
+	return sum
+};
+//求最大值
+Array.prototype.maxima = function ()
+{
+	for (var i = 0, maxValue = Number.MIN_VALUE; i < this.length; i++)parseInt(this[i]) > maxValue && (maxValue = this[i]);
+	return maxValue
+};
+//应用
+var arr = [1,21,3,4,22,45,6,7,32];
+alert(arr.join("+") + "=" + arr.sum()); //和：141
+alert(arr.join("|") + "中, 最大的数是:" + arr.maxima()); //最大数：45
+&lt;/script&gt;
+</pre>
+</body>
+</html>

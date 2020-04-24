@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>页面数字自增</title>
+	<style type="text/css" media="screen">
+		body {
+			margin: 0;
+			padding: 0;
+			text-align: center;
+			font:700 30px/1.5 arial
+		}
+	</style>
+	<script type="text/javascript">
+		window.onload = function() {
+			var nums = document.getElementsByTagName("p")
+			var i = 0
+			function timeCal() {
+				document.body.innerHTML = ++i
+			}
+			// 设定定时器，每1秒调用timCal函数一次
+			setInterval(timeCal, 1000)
+			timeCal()
+		}
+	</script>
+</head>
+<body>
+</body>
+</html>

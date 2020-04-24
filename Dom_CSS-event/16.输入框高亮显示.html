@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title></title>
+	<style>
+		body {
+			margin: 0;
+			padding: 0;
+		}
+		#box {
+			width: 400px;
+			height: 180px;
+			margin:10px auto;
+		}
+		label {
+			display: block;
+		}
+		input {
+			background-color: #dd0;
+		}
+		#btn {
+			background: orange;
+			border-radius: 5px;
+			cursor: pointer;
+		}
+	</style>
+	<script type="text/javascript">
+		window.onload = function() {
+			var inputs = document.getElementsByTagName("input")
+			for (let i = 0; i < inputs.length - 1; i++) {
+				inputs[i].onfocus = function() {
+					// 文本框聚焦添加样式
+					this.style.backgroundColor = "pink"
+				}
+				// 失焦后改为原来样式
+				inputs[i].onblur = function() {
+					this.style.backgroundColor = "#dd0"
+				}
+			}
+		}
+	</script>
+</head>
+<body>
+	<div id="box">
+		<h3>用户名</h3>
+		<label>用户名: <input type="text" name="" value=""></label>
+		<label>密 &ensp; 码: <input type="password" name="" value=""></label>
+		<input type="button" value = "登录" id = "btn">
+	</div>
+</body>
+</html>

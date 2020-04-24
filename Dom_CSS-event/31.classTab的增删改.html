@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <!--  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" /> -->
+    <meta name="viewport" content="width=device-width, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta content="maximum-dpr=2" name="flexible" />
+    <title>Document</title>
+    <link rel="stylesheet" href="css/normalize.css">
+    <script src="http://libs.baidu.com/jquery/1.10.2/jquery.min.js"></script>
+    <script src="js/index.js"></script>
+    <!--  <script src="http://g.tbcdn.cn/mtb/lib-flexible/0.3.4/??flexible_css.js,flexible.js"></script> -->
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        
+        img,
+        a,
+        input,
+        textarea {
+            border: 0;
+        }
+        
+        a {
+            color: currentColor;
+            text-decoration: none;
+        }
+        
+        button,
+        select {
+            border: none;
+        }
+        
+        input,
+        button,
+        select,
+        textarea {
+            outline: none;
+            cursor: pointer;
+        }
+        
+        table {
+            border-collapse: collapse;
+        }
+        
+        body {
+            font-family: PingFangSC-Regular, sans-serif;
+            font-size: 1rem;
+            color: #333;
+            background: #f0eff5;
+        }
+        
+        .clearfix:after {
+            content: "";
+            height: 0;
+            visibility: hidden;
+            display: block;
+            clear: both;
+        }
+        
+        .clearfix {
+            zoom: 1;
+        }
+        
+        .tabsbox {
+            margin: 100px auto;
+            border: 1px solid #ccc;
+            width: 750px;
+            overflow: hidden;
+        }
+        
+        .firstnav {
+            width: 100%;
+            height: 40px;
+            border-bottom: 1px solid #ccc;
+        }
+        
+        .firstnav li {
+            position: relative;
+            float: left;
+            width: 100px;
+            height: 40px;
+            text-align: center;
+            border-right: 1px solid #ccc;
+            cursor: pointer;
+        }
+        
+        .firstnav li.cur {
+            background: pink;
+        }
+        
+        .firstnav li span {
+            line-height: 40px;
+        }
+        
+        .firstnav i {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 20px;
+            height: 20px;
+        }
+        
+        .addtab {
+            float: right;
+            width: 40px;
+            height: 40px;
+            line-height: 40px;
+            text-align: center;
+            font-size: 30px;
+            border-left: 1px solid #ccc;
+            cursor: pointer;
+        }
+        
+        .tabscon {
+            padding: 12px;
+            height: 300px;
+        }
+        
+        .tabscon section {
+            display: none;
+        }
+        
+        .tabscon section.cur {
+            display: block;
+        }
+        
+        input {
+            width: 80px;
+            height: 32px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="tab">
+        <div class="tabsbox">
+            <nav class="firstnav">
+                <ul>
+                    <li class="cur"><span>测试1</span><i>×</i></li>
+                    <li><span>测试2</span><i>×</i></li>
+                    <li><span>测试3</span><i>×</i></li>
+                </ul>
+                <div class="addtab">
+                    <span>+</span>
+                </div>
+            </nav>
+
+            <div class="tabscon">
+                <section class="cur">测试1</section>
+                <section>测试2</section>
+                <section>测试3</section>
+            </div>
+
+        </div>
+    </div>
+    <script>
+        var that;
+        class Tab {
+            constructor(id) {
+                that = this;
+                this.main = $(id);
+                this.init();
+            }
+            init() {
+                that.updateTab();
+                this.main.on("click", "li", function() {
+                    that.toggleTab($(this));
+                })
+                this.main.on("click", ".addtab", function() {
+                    that.addTab();
+                })
+                this.main.on("click", "i", function(e) {
+                    that.removeTab($(this));
+                    e.stopPropagation();
+                })
+                this.main.on("dblclick", "span", function() {
+
+                    window.getSelection ? window.getSelection().removeAllRanges() : document.selection.empty();
+                    that.editTab($(this));
+
+                })
+                this.main.on("dblclick", "section", function() {
+
+                    window.getSelection ? window.getSelection().removeAllRanges() : document.selection.empty();
+                    that.editCon($(this));
+
+                })
+            }
+            updateTab() {
+                that.sections = this.main.find("section");
+                that.lis = this.main.find("li");
+                that.ul = this.main.find("ul");
+                that.tabscon = this.main.find(".tabscon");
+            }
+            clearClass() {
+                that.sections.removeClass("cur");
+                that.lis.removeClass("cur");
+            }
+            toggleTab(obj) {
+
+                obj.addClass("cur").siblings().removeClass();
+                that.sections.eq(obj.index()).addClass("cur").siblings().removeClass();
+
+            }
+            addTab() {
+                that.clearClass();
+                var newli = '<li class="cur"><span>新测试</span><i>×</i></li>';
+                var newsec = '<section class="cur">新测试</section>';
+                that.ul.append(newli);
+                that.tabscon.append(newsec);
+                that.updateTab();
+            }
+            removeTab(obj) {
+                console.log(obj.parent().index());
+                var index = obj.parent().index();
+                obj.parent().remove();
+                that.sections.eq(index).remove();
+                that.updateTab();
+                if (that.lis.hasClass("cur")) {
+                    return
+                } else if (index > 0) {
+                    index--;
+                    that.lis.eq(index).click();
+
+                }
+
+            }
+            editTab(obj) {
+                var str = obj.text();
+
+                obj.html('<input type="text" value="' + str + '">');
+                var ipt = obj.find("input");
+                ipt.select();
+                ipt.blur(function() {
+                    obj.html(ipt.val());
+                })
+                ipt.keyup(function(e) {
+                    if (e.keyCode === 13) {
+                        obj.html(ipt.val());
+                    }
+                });
+            }
+            editCon(obj) {
+                var str = obj.text();
+
+                obj.html('<input type="text" value="' + str + '">');
+                var ipt = obj.find("input");
+                ipt.select();
+                ipt.blur(function() {
+                    obj.html(ipt.val());
+                })
+                ipt.keyup(function(e) {
+                    if (e.keyCode === 13) {
+                        obj.html(ipt.val());
+                    }
+                });
+            }
+
+        }
+        new Tab("#tab");
+    </script>
+</body>
+
+</html>

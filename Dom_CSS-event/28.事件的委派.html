@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>事件委派</title>
+	<script type="text/javascript">
+		window.onload = function(){
+			var btn01 = document.getElementById("btn01");
+			var ul = document.getElementById("ul");
+			btn01.onclick = function(){
+				var li = document.createElement("li");
+				li.innerHTML = "<a href='javascript:;'class='link'>newLink</a>";
+
+				ul.appendChild(li);
+			};
+
+			var allA = document.getElementsByTagName('a');
+			/* 下面方式并不实用；新添加的元素不能响应事件
+    			for(var i=0; i<allA.length; i++){
+    				allA[i].onclick = function(){
+    					alert("xlx");
+    				};
+    			}
+    		*/
+    		/*
+    		 * 最好只需要绑定一次就好，单个事件绑定多个元素
+			 * 可以考虑绑定到其父元素上
+    		 */
+    		 ul.onclick = function(event){
+    		 	/*
+				 * 事件的委派：
+				 *	-是指事件统一绑定给共同的祖先元素，当后代触发事件时会冒泡到祖先元素，通过祖先元素的响应函数来处理事件
+    		 	 */
+    		 	 /*
+    		 	  * 如果触发事件的对象是所期望的元素则执行，否则不执行
+    		 	  * 需要通过判断来选择
+    		 	  * 	target: 返回触发事件的对象
+    		 	  */
+    		 	event = event || window.event;
+    		 	if(event.target.className == "link"){
+    		 		alert("你来打我呀 ~~~！");
+    		 	}
+    		 	
+    		 };
+
+		};
+	</script>
+	
+</head>
+<body>
+	<input type="button" id="btn01" value="添加新连接">
+	<ul id="ul">
+		<li><a href="javascript:;" class="link">link1</a></li>
+		<li><a href="javascript:;" class="link">link2</a></li>
+		<li><a href="javascript:;" class="link">link3</a></li>
+	</ul>
+</body>
+</html>

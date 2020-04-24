@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>control div attribute</title>
+	<style>
+		body {
+			margin: 0;
+			padding: 0;
+		}
+
+		#border {
+			width: 500px;
+			height: 50px;
+			padding: 0;
+			margin: 10px auto;
+			text-align: center;
+		}
+
+		#b1 {
+			height: 100px;
+			width: 100px;
+			background-color: red;
+			margin: 0 auto;
+		}
+	</style>
+</head>
+<body>
+	<div id='border'>
+		<input type="button" name="" value="变宽" id = 'btn01'>
+		<input type="button" name="" value="变高">
+		<input type="button" name="" value="变色">
+		<input type="button" name="" value="隐藏">
+		<input type="button" name="" value="重置">
+	</div>
+	
+	<div id="b1"></div>
+	<script>
+		// 获取标签的dom对象
+		var btn01 = document.getElementsByTagName('input')[0]
+		//var btn01 = document.getElementById('btn01')
+		var btn02 = document.getElementsByTagName('input')[1]
+		var btn03 = document.getElementsByTagName('input')[2]
+		var btn04 = document.getElementsByTagName('input')[3]
+		var btn05 = document.getElementsByTagName('input')[4]
+		var div = document.getElementById('b1')
+		btn01.onclick = function() {
+			// 改变div的宽度
+			div.style.width = '300px'
+		}
+		btn02.onclick = function() {
+			// 改变div的高度
+			div.style.height = '300px'
+		}
+		btn03.onclick = function() {
+			// 改变div背景颜色
+			div.style.backgroundColor = 'orange'
+		}
+		btn04.onclick = function() {
+			// 不显示div
+			div.style.display = 'none'
+		}
+		btn05.onclick = function() {
+			// 多种css样式同时设定
+			div.style.width = '100px'
+			div.style.height = '100px'
+			div.style.backgroundColor = 'red'
+			div.style.display = 'block'
+		}
+	</script>
+</body>
+</html>

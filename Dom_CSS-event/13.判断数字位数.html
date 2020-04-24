@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title></title>
+	<style>
+		body {
+			font:12px/1.5 arial;
+			text-align:center;
+		}
+		.f-text {
+			width:50px;
+			border:1px solid #ccc;
+			background:#f0f0f0;
+			font-family:inherit;
+			padding:3px;
+			margin-right:10px;
+		}
+	</style>
+	<script type="text/javascript">
+		window.onload = function ()
+		{
+			var aInput = document.getElementsByTagName("input");
+			var aSpan = document.getElementsByTagName("span")[0];
+			var i = 0;
+			
+			aInput[0].onkeyup = function ()
+			{
+				this.value = this.value.replace(/[^\d]/,"")
+			}
+			
+			aInput[1].onclick = function ()
+			{
+				// 三元运算 判断是否输入数字
+				(aInput[0].value == "") ?
+				alert("请输入数字！") : // 当输入为空时对比，弹框需要输入值
+				alert(/^\d{2}$/.test(parseInt(aInput[0].value)) ? "√ 是两位数" : "这是" + aInput[0].value.length + "位数"); // 再次用三元运算通过正则来判断是几位数
+			}
+		};
+	</script>
+</head>
+<body>
+	<input type="text" class="f-text" /><input type="button" value="是否为两位数" />
+</body>
+</html>

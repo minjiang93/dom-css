@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>时钟</title>
+	<style>
+		*{
+			margin: 0;
+			padding: 0;
+		}
+		.clock{
+			width: 300px;
+			height: 300px;
+			border: 10px solid #ccc;
+			border-radius: 50%;
+			margin: 150px auto;
+			position: relative;
+		}
+		.line{
+			width: 8px;
+			height: 300px;
+			background-color: #ccc;
+			position: absolute;
+			left: 50%; /*参照父容器宽度*/
+			top: 0;
+			transform: translate(-50%,0);/*参照元素本身尺寸*/
+		}
+		.line2{
+			transform: translate(-50%,0) rotate(30deg);
+		}
+		.line3{
+			transform: translate(-50%,0) rotate(60deg);
+		}
+		.line4{
+			transform: translate(-50%,0) rotate(90deg);
+		}
+		.line5{
+			transform: translate(-50%,0) rotate(120deg);
+		}
+		.line6{
+			transform: translate(-50%,0) rotate(150deg);
+		}
+		.cover{
+			width: 266px;
+			height: 266px;
+			border-radius: 50%;
+			background-color: #fff;
+			position: absolute;
+			left: 50%;
+			top: 50%;
+			transform: translate(-50%,-50%);
+		}
+		.hour{
+			width: 6px;
+			height: 88px;
+			background-color: red;
+			position: absolute;
+			left: 50%;
+			top:50%;
+			transform: translate(-50%,-100%);
+			transform-origin: center bottom;
+			animation:clockAnimate 43200s linear infinite;
+		}
+		.minute{
+			width: 4px;
+			height: 100px;
+			background-color: green;
+			position: absolute;
+			left: 50%;
+			top:50%;
+			transform: translate(-50%,-100%);
+			transform-origin: center bottom;
+			animation:clockAnimate 3600s linear infinite;
+		}
+		.second{
+			width: 2px;
+			height: 118px;
+			background-color: #000;
+			position: absolute;
+			left: 50%;
+			top:50%;
+			transform: translate(-50%,-100%);
+			transform-origin: center bottom;
+			animation:clockAnimate 60s steps(60) infinite; /*steps()动的步数和linear同属于animation-timing-function,只能用一个*/
+		}
+
+		.center{
+			width: 20px;
+			height: 20px;
+			background-color: #ccc;
+			border-radius: 50%;
+			position: absolute;
+			left: 50%;
+			top: 50%;
+			transform: translate(-50%,-50%);
+		}
+
+		@keyframes clockAnimate {
+			from{
+				transform: translate(-50%,-100%) rotate(0deg);
+			}
+			to{
+				transform: translate(-50%,-100%) rotate(360deg);
+			}
+		}
+	</style>
+</head>
+<body>
+	<div class="clock">
+		<div class="line line1"></div>
+		<div class="line line2"></div>
+		<div class="line line3"></div>
+		<div class="line line4"></div>
+		<div class="line line5"></div>
+		<div class="line line6"></div>
+		<div class="cover"></div>
+		<div class="hour"></div>
+		<div class="minute"></div>
+		<div class="second"></div>
+		<div class="center"></div>
+	</div>
+</body>
+</html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>跟随事件</title>
+	<style type="text/css">
+		*{
+			margin: 0;
+			padding:0;
+		}
+		#box1{
+			width: 100px;
+			height: 100px;
+			background-color: red;
+			position: absolute;
+		}
+	</style>
+
+	<script type="text/javascript">
+		window.onload = function(){
+
+			var box1 = document.getElementById("box1");
+
+			//给div绑定，当移除div将失效， 给document，不会失效
+			//box1.onmousemove = function(event)
+			document.onmousemove = function(event){
+				event = event || window.event;
+				/*
+				 * 获取滚动条的滚动距离
+				 * document.body.scrollTop; (只有chrome才能用)
+				 * 其他浏览器认为滚动条是html的 ==> document.documentElement.scrollTop;
+				 */
+				var left = event.clientX;
+				var top = event.clientY;
+
+				var st = document.body.scrollTop || document.documentElement.scrollTop;
+				var sl = document.body.scrollLeft || document.documentElement.scrollLeft;
+				/*
+				 * clientX和clientY是对应当前可见窗口的坐标
+				 * 如果设有很多的高度，当向下滚时，鼠标指针位置会变动
+				 * pageX和pageY 是对应网页的位置； IE8- 不支持
+				 */
+
+				//设置div偏移量
+				box1.style.left = left + sl + "px";
+				box1.style.top = top + st + "px";
+			};
+
+			var box2 = document.getElementById("box2");
+			box2.onmousemove = function(event){
+				event = event || window.event;
+				event.cancelBubble = true;
+			}
+
+		};
+	</script>
+</head>
+<body>
+	<div id="box2" style="width: 500px; height: 500px; background-color: #bfa;"></div>
+	<div id="box1"></div>
+</body>
+</html>

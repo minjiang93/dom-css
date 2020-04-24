@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>事件拖拽</title>
+	<style type="text/css">
+		#box1 {
+			width: 100px;
+			height: 100px;
+			background-color: red;
+			position: absolute;
+		}
+		#box2 {
+			width: 100px;
+			height: 100px;
+			background-color: green;
+			position: absolute;
+
+			left: 200px;
+			top: 200px;
+		}
+	</style>
+
+	<script type="text/javascript">
+		window.onload = function(){
+
+			var box1 = document.getElementById("box1");
+			//鼠标按下事件
+			box1.onmousedown = function(event){
+
+				/*
+				 * 鼠标的偏移量 ==> 鼠标.clientX - 元素.offsetLeft; && 鼠标.clientY - 元素.offsetTop;
+				 *			       
+				 */
+
+				 //设置box1捕获事件
+				 /*
+				  * setCapture()
+				  *	  - 只有IE支持，其他的都不支持，Chrome还会报错
+				  */
+				 if(box1.setCapture){
+				 	box1.setCapture();
+				 }
+				 //box1.setCapture && box1.setCapture()  ==> 和if语句一样
+
+				 event = event || window.event;
+				 var ol = event.clientX - box1.offsetLeft;
+				 var ot = event.clientY - box1.offsetTop;
+
+				//鼠标移动事件
+				document.onmousemove = function(event){
+					event = event || window.event;
+
+					var left = event.clientX-ol;
+					var top = event.clientY-ot;
+
+					box1.style.left = left + "px";
+					box1.style.top = top + "px";
+				};
+				//鼠标松开事件
+				document.onmouseup = function(){
+					//取消鼠标移动事件
+					document.onmousemove = null;
+					//松开该事件没有存在的意义，需要取消
+					document.onmouseup = null;
+					//需要取消对事件的捕获
+					box1.releaseCapture && box1.releaseCapture();
+				};
+
+				//取消默认行为
+				/*
+				 * 当拖拽一个网页内容时，浏览器会默认去搜索拖拽的内容
+				 *   这回导致拖拽功能异常，也可取消默认行为
+				 *		return false;  (IE9+)
+				 */
+				return false;
+			};
+		};
+	</script>
+</head>
+<body>
+	<div id="box1"></div>
+	<div id="box2"></div>
+</body>
+</html>

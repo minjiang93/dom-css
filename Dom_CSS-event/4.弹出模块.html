@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>popup</title>
+	<style type="text/css" media="screen">
+		body {
+			margin: 0;
+			padding: 0;
+		}
+		#btn {
+			width: 80px;
+			margin:10px auto;
+		}
+		#pop {
+			width: 400px;
+			height:180px;
+			margin:250px auto;
+			display: none;
+		}
+		#header {
+			width: 100%;
+			height: 30px;
+			background-color: #FC0;
+			border: 3px solid #f90;
+			position: relative;
+		}
+		
+		#header > #close {
+			display: block;
+			width: 15px;
+			height: 15px;
+			background: white;
+			text-align: center;
+			line-height: 12px;
+			color:orange;
+			position: absolute;
+			right: 5px;
+			top:30%;
+		}
+
+		#close:hover {
+			cursor: pointer;
+		}
+
+		#contents {
+			width: 100%;
+			height: 130px;
+			border: 3px solid #f90;
+		}
+	</style>
+
+	<script>
+		window.onload = function() {
+			var cls = document.getElementById("close")
+			var btn = document.getElementById('btn')
+			var pops = document.getElementById("pop")
+			btn.onclick = function() {
+				pops.style.display = 'block'
+			}
+			cls.onclick = function() {
+				pops.style.display = 'none'
+			}
+		}
+	</script>
+</head>
+<body>
+	<div id="btn">
+		<button>弹出框</button>
+	</div>
+	<div id="pop">
+		<div id="header">
+			<span id='close'>x</span>
+		</div>
+		<div id="contents"></div>
+	</div>
+</body>
+</html>

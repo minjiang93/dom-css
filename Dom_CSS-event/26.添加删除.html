@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en"> 
+<head>
+	<meta charset="utf-8">
+	<title>增删改查</title>
+	<style type="text/css">
+		*{
+			margin:0;
+			padding:0;
+		}
+
+		table {
+			width: 300px;
+			margin:50px auto;
+		}
+		tr{
+			height: 1px;
+		}
+		td, th{
+			border: 1px solid black;
+			text-align: center;
+		}
+
+		div {
+			border: 1px solid black;
+			width: 400px;
+			margin:50px auto;
+		}
+
+		div > h4 {
+			margin-top: 30px;
+			margin-left: 20px;
+			box-sizing: border-box;
+		}
+		input {
+			height: 27px;
+			width: 90%;
+		}
+
+		a{
+			text-decoration: none;
+		}
+	</style>
+
+	<script type="text/javascript">
+
+		function delA(){					
+					// alert("xlx");
+					var tr = this.parentNode.parentNode; //获取爷爷辈的元素
+
+					var name = tr.getElementsByTagName("td")[0].innerHTML;
+					//或者可以 var name = tr.children[0].innerHTML;
+					
+					//警示框来提醒用户是否确认此操作(DOM下confirm());具有返回值：true || false
+					var flag = confirm("确认删除" + name + "!!!");
+
+					if(flag){
+						tr.parentNode.removeChild(tr); //删除元素是通过找其父元素来删除自己
+					}
+
+					//取消超链接默认行为
+					return false;
+					
+				};
+
+		window.onload = function(){
+
+			//获取超链接
+			var allA = document.getElementsByTagName("a");
+			//为每个超链接绑定响应函数
+			for(var i=0; i<allA.length; i++){
+				allA[i].onclick = delA;
+			}
+
+			//添加功能
+			//先为提交按钮绑定点击事件
+			var addEmpButton = document.getElementById("addEmpButton");
+			addEmpButton.onclick = function(){
+				//获取写入的信息
+				var empName = document.getElementById("empName").value;
+				var email = document.getElementById("email").value;
+				var salary = document.getElementById("salary").value;
+
+				//将获取的信息存入到tr中
+				var tr = document.createElement("tr");
+
+				tr.innerHTML = "<td>" + empName + "</td>"+
+							   "<td>" + email + "</td>"+
+							   "<td>" + salary + "</td>"+
+							   "<td><a href='javascript:;'>Delete</a></td>";
+				//获取刚添加的a标签，绑定单机事件
+				var a = tr.getElementsByTagName("a")[0];
+				a.onclick = delA;
+
+				//获取table
+				var employeeTable = document.getElementById("employeeTable");
+				//有些浏览器会添加tbody给table，需要获取tbody
+				// var tbody = employeeTable.getElementsByTagName("tbody")[0];
+				//将tr添加到table中 ==> tbody.appendChild(tr);
+				employeeTable.appendChild(tr);
+			};
+
+		};
+	</script>
+</head>
+<body>
+	<table>
+		<tr id="employeeTable">
+			<th>Name</th>
+			<th>Email</th>
+			<th>Salary</th>
+			<th>&nbsp</th>
+		</tr>
+		<tr>
+			<td>Tom</td>
+			<td>tom@tom.com</td>
+			<td>5000</td>
+			<td><a href="deleteEmp?id=001">Delete</a></td>
+		</tr>
+		<tr>
+			<td>Jerry</td>
+			<td>jerry@jerry.com</td>
+			<td>8000</td>
+			<td><a href="deleteEmp?id=002">Delete</a></td>
+		</tr>
+		<tr>
+			<td>Bob</td>
+			<td>bob@bob.com</td>
+			<td>10000</td>
+			<td><a href="deleteEmp?id=003">Delete</a></td>
+		</tr>
+	</table>
+	<div class="formDiv">
+		
+		<table>
+			<h4>添加新员工</h4>
+			<tr>
+				<td class="word">name: </td>
+				<td class="inp">
+					<input type="text" name="empName" id="empName">
+				</td>
+			</tr>
+			<tr>
+				<td class="word">Email: </td>
+				<td>
+					<input type="text" name="email" id="email">
+				</td>
+			</tr>
+			<tr>
+				<td class="word">Salary: </td>
+				<td>
+					<input type="text" name="salary" id="salary">
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2" align="center">
+					<button id="addEmpButton" value="abc">Submit</button>
+				</td>
+			</tr>
+		</table>	
+	</div>
+</body>
+</html>
