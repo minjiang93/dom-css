@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>    
+<meta charset="utf-8">
+  <style>
+      /* 主体 */
+      .counter{
+          width: 396px;
+          height: 486px;
+          background-color: #F2F2F2;
+          border: 1px solid #C2C3C6;
+          margin: 50px auto;
+      }
+      /* 显示框 */
+      #box {
+          height: 70px;
+          width: 336px;
+          background-color: #323232;
+          border: none;
+          margin: 40px 25px 32px 25px;
+          font: 700 40px/70px "微软雅黑";
+          color: #ffffff;
+          padding-right: 10px;
+      }
+      /* 功能区 */
+      .funct {
+          padding: 0 20px;
+          position: relative;
+      }
+      /* 按钮样式 */
+      .funct input {
+          height: 40px;
+          width: 60px;
+          margin: 10px 10px;
+          font: 400 20px/40px "微软雅黑";
+      }
+      /* 清除按钮样式 */
+      .funct #res {
+          width: 150px;
+      }
+      /* + - = . 按钮浮动 */
+      #add, #reduce, #dot, #sum {
+          position: absolute;
+          right: 0px;
+          bottom: 0px;
+      }
+      /* 减号位置 */
+      #reduce {
+          right: 30px;
+          top: 60px;
+      }
+      /* 加号位置 */
+      #add {
+          right: 30px;
+          top: 120px;
+      }
+      /* 等于号位置 */
+      #sum {
+          height: 100px;
+          right: 30px;
+          bottom: 0px;
+      }
+      /* 小数点位置 */
+      #dot {
+          right: 120px;
+          bottom: 0px;
+      }
+      /* 0 */
+      #zero {
+          width: 150px;
+      } 
+      /* 数字区 */
+      .numb {
+          width: 280px;
+      }
+  </style>
+  <script>
+      window.onload = function(){
+        // 将docment.getElementById付个一个值
+        function query(id) { 
+            return document.getElementById(id)
+        }
+        // 屏幕上的数字拼接(字符串拼接)
+        function nums (value) {
+            query('box').value += value
+          }
+        // 计算显示屏上的公式
+        function cal() {
+            var formula = query('box').value
+            var result = eval(formula)  // eval()函数会把传入的字符当做js来执行
+            query('box').value = result
+          }
+        // 将点击的数字和符号放入显示屏中
+        // 监听数字按键
+        query('one').onclick = function() {
+            nums(this.value)
+        }
+        query('two').onclick = function() {
+            nums(this.value)
+        }
+        query('three').onclick = function() {
+            nums(this.value)
+        }
+        query('four').onclick = function() {
+            nums(this.value)
+        }
+        query('five').onclick = function() {
+            nums(this.value)
+        }
+        query('six').onclick = function() {
+            nums(this.value)
+        }
+        query('seven').onclick = function() {
+            nums(this.value)
+        }
+        query('eight').onclick = function() {
+            nums(this.value)
+        }
+        query('nine').onclick = function() {
+            nums(this.value)
+        }
+        query('zero').onclick = function() {
+            nums(this.value)
+        }
+        // 创建符号数组
+        var operators = ['+','-','*','/']
+        // 屏幕上拼接符号
+        query('add').onclick = function() {
+            query('box').value += operators[0]
+        }
+        query('reduce').onclick = function() {
+            query('box').value += operators[1]
+        }
+        query('times').onclick = function() {
+            query('box').value += operators[2]
+        }
+        query('division').onclick = function() {
+            query('box').value += operators[3]
+        }
+        // 调用计算函数
+        query('sum').onclick = function () {
+            cal()
+          }
+        // 清空显示屏幕
+        query('res').onclick = function () {
+            query('box').value = ''
+          }
+    }
+  </script>
+</head>
+<body>
+    </div>
+    <div class="counter">
+        <input type="text" id="box" style="text-align:right" readOnly="true" value="">
+        <div class="funct">
+            <input type="reset" id="res" value="C">
+            <input type="button" id="division" value="/">
+            <input type="button" id="times" value="*">
+            <input type="button" id="add" value="+">
+            <input type="button" id="reduce" value="-">                                
+            <input type="button" id="dot" value=".">
+            <input type="button" id="sum" value="=">  
+
+            <div class="numb">
+                <input type="button" id="one" value="1">
+                <input type="button" id="two" value="2">
+                <input type="button" id="three" value="3">
+                <input type="button" id="four" value="4">
+                <input type="button" id="five" value="5">
+                <input type="button" id="six" value="6">
+                <input type="button" id="seven" value="7">
+                <input type="button" id="eight" value="8">
+                <input type="button" id="nine" value="9">
+                <input type="button" id="zero" value="0">
+            </div>                        
+        </div>                            
+    </div>  
+</body>
+</html>
